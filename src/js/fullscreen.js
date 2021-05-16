@@ -258,13 +258,16 @@ class Fullscreen {
     if (browser.isIos && this.player.config.fullscreen.iosNative) {
       if (this.player.isVimeo) {
         this.player.embed.requestFullscreen();
+        screen.orientation.lock("landscape-primary");
       } else {
         this.target.webkitEnterFullscreen();
+        screen.orientation.lock("landscape-primary");
       }
     } else if (!Fullscreen.native || this.forceFallback) {
       this.toggleFallback(true);
     } else if (!this.prefix) {
       this.target.requestFullscreen({ navigationUI: 'hide' });
+      screen.orientation.lock("landscape-primary");
     } else if (!is.empty(this.prefix)) {
       this.target[`${this.prefix}Request${this.property}`]();
     }
